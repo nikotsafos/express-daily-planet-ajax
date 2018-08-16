@@ -26,6 +26,8 @@ app.get('/articles/new', function(req, res) {
     res.render('articles/new');
 });
 
+
+
 app.get('/articles/:index', function(req, res) {
     var index = parseInt(req.params.index);
     if (index < articles.length && index >= 0) {
@@ -44,6 +46,57 @@ app.get('/about', function(req, res) {
     res.render('about');
 });
 
+app.get('/articles/edit/:index', function(req, res) {
+  var index = parseInt(req.params.index);
+  if (index < articles.length && index >= 0) {
+      res.render('articles/edit', { article: articles[req.params.index]});
+  } else {
+      res.send('Error');
+  }
+
+});
+
+app.put('/articles/:index', function(req, res) {
+  var index = parseInt(req.params.index);
+  if (index < articles.length && index >= 0) {
+      res.render('/articles', { article: articles[req.params.index]});
+  } else {
+      res.send('Error');
+  }
+
+  res.send('put');
+});
+
+// app.put('/articles/:index', function(req, res) {
+//   teamsDB.editTeam(req.params.index, req.body);
+//   res.send('put');
+// });
+// app.delete('/articles/:index', function(req, res) {
+//   teamsDB.deleteTeam(req.params.index);
+//   res.send('delete');
+// });
+// app.delete('/teams/:name', function(req, res) {
+//   teamsDB.deleteTeam(req.params.name)
+//   res.send('delete');
+// });
+
 app.listen(3000, function() {
     console.log("You're listening to the smooth sounds of port 3000 in the morning");
 });
+
+
+// function getAllArticles() {
+//   return JSON.parse(articles);
+// }
+//
+//
+// function deleteArticles(articleName){
+//   var articles = getAllArticles();
+//   var index = -1;
+//
+//   for(var i = 0; i < articles.length; i++){
+//     if(articles[i].name === articleName){
+//       index = i;
+//       break;
+//     }
+//   }
